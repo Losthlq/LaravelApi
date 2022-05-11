@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ClientRequest;
 use App\Http\Resources\ClientResource;
 use App\Models\Clients;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -14,17 +15,8 @@ class ClientController extends Controller
         return Clients::all();
     }
 
-    public function store(Request $request)
+    public function store(ClientRequest $request)
     {
-        $request->validate(
-            [
-                'firstName' => 'required|string|max:32|min:2|regex:/^[a-zA-Z]+$/',
-                'lastName' => 'required|string|max:32|min:2|regex:/^[a-zA-Z]+$/',
-                'email' => 'required|string|unique:clients,email',
-                'phoneNumber' => 'required|regex:/^\+?[1-9]\d{1,14}$/',
-            ]
-        );
-
         $review = new Clients();
         $review->firstName = $request->input('firstName');
         $review->lastName = $request->input('lastName');
@@ -49,17 +41,8 @@ class ClientController extends Controller
         }
     }
 
-    public function update(Request $request, $id)
+    public function update(ClientRequest $request, $id)
     {
-        $request->validate(
-            [
-                'firstName' => 'required|string|max:32|min:2|regex:/^[a-zA-Z]+$/',
-                'lastName' => 'required|string|max:32|min:2|regex:/^[a-zA-Z]+$/',
-                'email' => 'required|string|unique:clients,email',
-                'phoneNumber' => 'required|regex:/^\+?[1-9]\d{1,14}$/',
-            ]
-        );
-
         try {
             $result = Clients::findOrFail($id);
             $result->firstName = $request->input('firstName');
