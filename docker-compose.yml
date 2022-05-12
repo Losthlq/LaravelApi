@@ -57,6 +57,7 @@ services:
         #smtp Service
     fake-smtp:
         image: mailhog/mailhog
+        container_name: fake_smtp
         ports:
             - "1025:1025"
             - "8025:8025"
