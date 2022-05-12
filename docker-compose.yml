@@ -54,6 +54,16 @@ services:
         networks:
             - app-network
 
+        #smtp Service
+    fake-smtp:
+        image: mailhog/mailhog
+        ports:
+            - "1025:1025"
+            - "8025:8025"
+
+        networks:
+            - app-network
+
 #Docker Networks
 networks:
     app-network:

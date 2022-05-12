@@ -16,7 +16,7 @@ class CreateNotificationsTable extends Migration
         Schema::create('notifications', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('clientId')->nullable();
-            $table->foreign('clientId')->references('id')->on('clients');
+            $table->foreign('clientId')->references('id')->on('clients')->onDelete('cascade');
             $table->string('channel', 5);
             $table->string('content');
             $table->timestamps();
